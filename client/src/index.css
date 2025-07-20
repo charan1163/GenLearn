@@ -1,3 +1,4 @@
+/* client/src/index.css */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -22,12 +23,23 @@ a:hover {
   color: #535bf2;
 }
 
+/* Ensure HTML and Body take full viewport dimensions */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0; /* Remove default margins */
+  padding: 0; /* Remove default padding */
+  overflow: hidden; /* Prevent scrollbars if content is within viewport */
+}
+
 body {
-  margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  min-height: 100vh;       /* Ensure body takes full viewport height */
+  background-color: #242424; /* Your desired dark background */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; /* Global font */
+  color: rgba(255, 255, 255, 0.87); /* Global text color */
 }
 
 h1 {
