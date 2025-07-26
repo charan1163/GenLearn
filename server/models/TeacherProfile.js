@@ -1,13 +1,32 @@
-// TeacherProfile.js
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const teacherProfileSchema = new mongoose.Schema({
-  facultyId: { type: String, required: true, unique: true, index: true },
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true, lowercase: true, trim: true },
-  phone: { type: String },
-  department: { type: String },
-  profilePic: { type: String }
-}, { timestamps: true });
+const TeacherProfileSchema = new mongoose.Schema({
+    teacher: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Teacher',
+        required: true,
+        unique: true,
+    },
+    name: {
+        type: String,
+        required: true,
+    },
+    department: {
+        type: String,
+        required: true,
+    },
+    subjectsHandled: {
+        type: [String],
+        default: [],
+    },
+    contactNumber: {
+        type: String,
+    },
+    email: {
+        type: String,
+    },
+});
 
-module.exports = mongoose.model('TeacherProfile', teacherProfileSchema);
+const TeacherProfile = mongoose.model('TeacherProfile', TeacherProfileSchema);
+
+export default TeacherProfile;

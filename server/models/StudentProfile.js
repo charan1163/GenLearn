@@ -1,13 +1,36 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const studentProfileSchema = new mongoose.Schema({
-  rollNumber: { type: String, required: true, unique: true, index: true },
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true, lowercase: true, trim: true },
-  phone: { type: String },
-  department: { type: String },
-  semester: { type: Number },
-  profilePic: { type: String }
-}, { timestamps: true });
+const StudentProfileSchema = new mongoose.Schema({
+    student: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Student',
+        required: true,
+        unique: true,
+    },
+    name: {
+        type: String,
+        required: true,
+    },
+    department: {
+        type: String,
+        required: true,
+    },
+    year: {
+        type: Number,
+        required: true,
+    },
+    section: {
+        type: String,
+        required: true,
+    },
+    contactNumber: {
+        type: String,
+    },
+    email: {
+        type: String,
+    },
+});
 
-module.exports = mongoose.model('StudentProfile', studentProfileSchema);
+const StudentProfile = mongoose.model('StudentProfile', StudentProfileSchema);
+
+export default StudentProfile;

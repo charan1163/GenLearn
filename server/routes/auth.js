@@ -1,42 +1,75 @@
-// server\routes\auth.js
-const express = require('express');
+import express from 'express';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import Student from '../models/Students.js';
+import Teacher from '../models/Teachers.js';
+
 const router = express.Router();
-const Student = require('../models/Students');
-const Teacher = require('../models/Teachers');
 
+// @route   POST api/auth/login
+// @desc    Authenticate user (student or teacher) & get token
+// @access  Public
 router.post('/login', async (req, res) => {
-  const { rollNumber, password, role } = req.body;
+    const { username, password, userType } = req.body;
 
-  console.log('Backend received:', { rollNumber, password, role });
+    try {
+        let user;
+        let Model;
+        let idField;
 
-  try {
-    let user;
+        // Determine which model to use based on userType
+        if (userType === 'student') {
+            Model = Student;
+            idField = 'rollNumber';
+        } else if (userType === 'teacher') {
+            Model = Teacher;
+            idField = 'facultyId';
+        } else {
+            return res.status(400).json({ msg: 'Invalid user type' });
+        }
 
-    if (role === 'student') {
-      console.log('Querying Student with:', { rollNumber, password });
-      user = await Student.findOne({ rollNumber, password });
-      // --- ADD THIS LINE HERE ---
-      console.log('Raw user object from DB (student query):', user);
-    } else if (role === 'teacher') {
-      console.log('Querying Teacher with:', { facultyId: rollNumber, password });
-      user = await Teacher.findOne({ facultyId: rollNumber, password });
-      // --- ADD THIS LINE HERE ---
-      console.log('Raw user object from DB (teacher query):', user);
-    } else {
-      return res.status(400).json({ message: 'Invalid role' });
+        // Check if user exists
+        user = await Model.findOne({ [idField]: username });
+        if (!user) {
+            return res.status(400).json({ msg: 'Invalid credentials' });
+        }
+
+        // Check password
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ msg: 'Invalid credentials' });
+        }
+
+        // User matched, create JWT payload
+        const payload = {
+            user: {
+                id: user.id,
+                role: userType
+            }
+        };
+
+        // Sign the token
+        jwt.sign(
+            payload,
+            process.env.JWT_SECRET || 'your_default_jwt_secret', // Use a secret from .env in production
+            { expiresIn: 3600 }, // Expires in 1 hour
+            (err, token) => {
+                if (err) throw err;
+                res.json({
+                    token,
+                    user: {
+                        id: user.id,
+                        username: user[idField],
+                        userType: userType
+                    }
+                });
+            }
+        );
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
     }
-
-    console.log('User found:', user ? 'Yes' : 'No');
-
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    res.status(200).json({ message: 'Login successful', user });
-  } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
 });
 
-module.exports = router;
+export default router;

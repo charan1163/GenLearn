@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Login.css'; // Import the new CSS file
+import { useNavigate } from 'react-router-dom';
+import './Login.css'; // Assuming Login.css is in the same directory
 
 function Login() {
   const [rollNumber, setRollNumber] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('student');
 
-  // State for general login error/success messages
   const [loginMessage, setLoginMessage] = useState({ type: '', text: '' });
-  // State for loading indicator
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,9 +26,22 @@ function Login() {
       });
 
       setLoginMessage({ type: 'success', text: response.data.message });
+
+      // --- Store ID and Redirect based on role ---
+      if (response.data.user && response.data.user.userType === 'student') {
+        localStorage.setItem('loggedInRollNumber', response.data.user.idForProfile); // Use idForProfile
+        navigate('/student-dashboard');
+      } else if (response.data.user && response.data.user.userType === 'teacher') {
+        localStorage.setItem('loggedInFacultyId', response.data.user.idForProfile); // Store facultyId
+        navigate('/teacher-dashboard');
+      } else {
+        setLoginMessage({ type: 'error', text: 'Login successful, but unknown user type.' });
+      }
+      // --- End Store ID and Redirect ---
+
       setRollNumber('');
       setPassword('');
-      // setRole('student'); // Keep role selected or reset based on preference
+
     } catch (error) {
       console.error('Login error:', error);
       const message = error.response?.data?.message || error.request ? 'Network error.' : 'An unexpected error occurred.';
@@ -41,10 +55,10 @@ function Login() {
     <form onSubmit={handleLogin}>
       {/* GenLearn Logo */}
       <img
-        src="https://placehold.co/100x100/007bff/ffffff?text=GL" // Placeholder logo. Replace with your actual logo URL
+        src="https://placehold.co/100x100/007bff/ffffff?text=GL"
         alt="GenLearn Logo"
         className="login-logo"
-        onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/100x100/cccccc/000000?text=Logo"; }} // Fallback
+        onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/100x100/cccccc/000000?text=Logo"; }}
       />
 
       {/* Message Box for Success/Error */}
@@ -95,4 +109,4 @@ function Login() {
   );
 }
 
-export default Login; // Export App as default, assuming index.js imports App
+export default Login;

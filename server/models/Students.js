@@ -1,9 +1,17 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const studentSchema = new mongoose.Schema({
-  rollNumber: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  name: String
+const StudentSchema = new mongoose.Schema({
+    rollNumber: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
 });
 
-module.exports = mongoose.model('Student', studentSchema);
+const Student = mongoose.model('Student', StudentSchema);
+
+export default Student;

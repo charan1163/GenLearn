@@ -101,6 +101,29 @@ button[type="submit"]:disabled {
     box-shadow: none;
 }
 
+/* Message Box (Success/Error) */
+.login-message {
+    padding: 0.7rem;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+.login-message.show {
+    opacity: 1;
+}
+.login-message.success {
+    background-color: #28a745;
+    color: #fff;
+}
+.login-message.error {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 600px) {
     form {
@@ -110,7 +133,7 @@ button[type="submit"]:disabled {
     .login-logo {
         width: 60px;
         height: 60px;
-        margin-top: -1rem; /* Adjust for smaller logo */
+        margin-top: -1rem;
     }
     input[type="text"],
     input[type="password"],

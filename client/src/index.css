@@ -4,9 +4,9 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: light dark; /* Can keep this, but won't be actively used by toggle */
+  color: rgba(255, 255, 255, 0.87); /* Default text color for dark background */
+  background-color: #242424; /* Default background color */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,19 +27,19 @@ a:hover {
 html, body {
   width: 100%;
   height: 100%;
-  margin: 0; /* Remove default margins */
-  padding: 0; /* Remove default padding */
-  overflow: hidden; /* Prevent scrollbars if content is within viewport */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 body {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center;     /* Center vertically */
-  min-height: 100vh;       /* Ensure body takes full viewport height */
-  background-color: #242424; /* Your desired dark background */
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; /* Global font */
-  color: rgba(255, 255, 255, 0.87); /* Global text color */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #242424; /* Consistent dark background */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: rgba(255, 255, 255, 0.87); /* Consistent text color */
 }
 
 h1 {
