@@ -21,8 +21,10 @@ function Login() {
 
     try {
       console.log('Frontend sending:', { rollNumber, password, role });
-      const response = await axios.post('http://localhost:5000/api/login', {
-        rollNumber, password, role
+      const response = await axios.post('/api/auth/login', {
+        username: rollNumber,
+        password,
+        userType: role
       });
 
       setLoginMessage({ type: 'success', text: response.data.message });

@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
-import StudentDashboard from './components/StudentDashboard';
-import TeacherDashboard from './components/TeacherDashboard';
-import StudentProfileView from './components/StudentProfileView';
-import TeacherProfileView from './components/TeacherProfileView';
-import UpdateProfileForm from './components/UpdateProfileForm';
+import Login from './components/Login.jsx';
+import StudentDashboard from './components/StudentDashboard.jsx';
+import TeacherDashboard from './components/TeacherDashboard.jsx';
+import StudentProfileView from './components/StudentProfileView.jsx';
+import TeacherProfileView from './components/TeacherProfileView.jsx';
+import UpdateProfileForm from './components/UpdateProfileForm.jsx';
 
 function App() {
   return (
