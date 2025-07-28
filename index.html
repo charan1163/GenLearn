@@ -43,16 +43,9 @@
     </div>
     
     <script>
-        // Try to redirect to the GitHub Pages URL, but fallback to client directory
+        // Redirect to the GitHub Pages URL
         setTimeout(function() {
-            // Check if we're already on GitHub Pages
-            if (window.location.hostname.includes('github.io')) {
-                // We're on GitHub Pages, try to load the client directory
-                window.location.href = './client/';
-            } else {
-                // We're on the main repository, redirect to GitHub Pages
-                window.location.href = 'https://charan1163.github.io/GenLearn/';
-            }
+            window.location.href = 'https://charan1163.github.io/GenLearn/';
         }, 2000);
     </script>
 </body>
