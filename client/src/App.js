@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './components/Login.jsx';
 import StudentDashboard from './components/StudentDashboard.jsx';
 import TeacherDashboard from './components/TeacherDashboard.jsx';
@@ -9,7 +9,7 @@ import UpdateProfileForm from './components/UpdateProfileForm.jsx';
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         {/* Login Page - Default route */}
         <Route path="/" element={<Login />} />
@@ -29,7 +29,7 @@ function App() {
         {/* Optional: Add a 404 Not Found page */}
         {/* <Route path="*" element={<div>404 Not Found</div>} /> */}
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
