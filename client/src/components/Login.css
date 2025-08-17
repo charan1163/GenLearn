@@ -1,0 +1,145 @@
+/* client/src/components/Login.css */
+
+/* The form itself acts as the main container for styling */
+form {
+    background-color: #2c2c2c; /* Dark card background */
+    padding: 2.5rem; /* Increased padding */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Soft shadow */
+    width: 100%;
+    max-width: 380px; /* Max width for the form */
+    border: 1px solid #444; /* Subtle border */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between form elements */
+    position: relative; /* Needed for positioning logo */
+}
+
+/* Logo Image Styling */
+.login-logo {
+    display: block; /* Ensures it takes its own line */
+    margin: -1.5rem auto 1rem auto; /* Adjust margin to position above form, center */
+    width: 80px; /* Adjust logo width */
+    height: 80px; /* Adjust logo height */
+    border-radius: 50%; /* Make it circular */
+    object-fit: cover; /* Ensure image covers the area */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Subtle glow */
+}
+
+/* Input fields and labels */
+input[type="text"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    background-color: #3a3a3a; /* Darker input background */
+    color: #e0e0e0;
+    border: 1px solid #555;
+    font-size: 0.95rem;
+    box-sizing: border-box; /* Include padding/border in element's total width/height */
+}
+
+input::placeholder {
+    color: #999;
+}
+
+input:focus,
+select:focus {
+    border-color: #007bff; /* Blue border on focus */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.3); /* Blue glow */
+    outline: none;
+}
+
+/* Labels for inputs */
+label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #bbb;
+    margin-bottom: 0.3rem;
+}
+
+
+/* Role Selector (Styling for the <select> element) */
+select {
+    -webkit-appearance: none; /* Remove default arrow on WebKit browsers */
+    -moz-appearance: none; /* Remove default arrow on Firefox */
+    appearance: none; /* Remove default arrow */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23bbb%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.2-6.4H18.8c-7.7%200-13.5%205.1-13.2%2012.8L146.2%20247.3c4.3%205.1%2011.6%205.1%2015.9%200L287%2069.4z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 0.7rem top 50%;
+    background-size: 0.65rem auto;
+    cursor: pointer;
+}
+
+/* Submit Button */
+button[type="submit"] {
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 123, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+button[type="submit"]:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Message Box (Success/Error) */
+.login-message {
+    padding: 0.7rem;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+.login-message.show {
+    opacity: 1;
+}
+.login-message.success {
+    background-color: #28a745;
+    color: #fff;
+}
+.login-message.error {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    form {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    .login-logo {
+        width: 60px;
+        height: 60px;
+        margin-top: -1rem;
+    }
+    input[type="text"],
+    input[type="password"],
+    select,
+    button[type="submit"] {
+        font-size: 0.9rem;
+        padding: 0.6rem 0.8rem;
+    }
+}

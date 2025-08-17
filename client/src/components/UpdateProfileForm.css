@@ -1,0 +1,81 @@
+.update-profile-form {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.update-profile-form h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.form-actions button {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.form-actions button:hover {
+    transform: translateY(-2px);
+}
+
+.btn-save {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-save:hover {
+  background-color: #218838;
+}
+
+.btn-cancel {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background-color: #5a6268;
+}
