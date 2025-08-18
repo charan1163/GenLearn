@@ -3,6 +3,8 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import Student from '../models/Students.js';
 import Teacher from '../models/Teachers.js';
+import StudentProfile from '../models/StudentProfile.js';
+import TeacherProfile from '../models/TeacherProfile.js';
 
 const router = express.Router();
 
@@ -31,44 +33,38 @@ router.post('/login', async (req, res) => {
         // Check if user exists
         user = await Model.findOne({ [idField]: username });
         if (!user) {
-            return res.status(400).json({ msg: 'Invalid credentials' });
+            return res.status(400).json({ message: 'Invalid credentials' });
         }
 
         // Check password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ msg: 'Invalid credentials' });
+            return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        // User matched, create JWT payload
-        const payload = {
-            user: {
-                id: user.id,
-                role: userType
-            }
-        };
+        // Get profile information
+        let profile;
+        if (userType === 'student') {
+            profile = await StudentProfile.findOne({ student: user._id });
+        } else {
+            profile = await TeacherProfile.findOne({ teacher: user._id });
+        }
 
-        // Sign the token
-        jwt.sign(
-            payload,
-            process.env.JWT_SECRET || 'your_default_jwt_secret', // Use a secret from .env in production
-            { expiresIn: 3600 }, // Expires in 1 hour
-            (err, token) => {
-                if (err) throw err;
-                res.json({
-                    token,
-                    user: {
-                        id: user.id,
-                        username: user[idField],
-                        userType: userType
-                    }
-                });
+        // Return success response with user info
+        res.json({
+            message: 'Login successful',
+            user: {
+                id: user._id,
+                username: user[idField],
+                userType: userType,
+                idForProfile: user[idField], // Use for profile lookup
+                name: profile?.name || 'User'
             }
-        );
+        });
 
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        res.status(500).json({ message: 'Server error' });
     }
 });
 

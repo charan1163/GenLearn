@@ -15,20 +15,60 @@ const StudentProfileSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    semester: {
+        type: String,
+        default: '1',
+    },
     year: {
         type: Number,
-        required: true,
+        default: 1,
     },
     section: {
         type: String,
-        required: true,
+        default: 'A',
     },
-    contactNumber: {
+    phone: {
         type: String,
+        default: '',
     },
     email: {
         type: String,
+        default: '',
     },
+    profilePic: {
+        type: String,
+        default: '',
+    },
+    linkedin: {
+        type: String,
+        default: '',
+    },
+    github: {
+        type: String,
+        default: '',
+    },
+    portfolio: {
+        type: String,
+        default: '',
+    },
+    resumeLink: {
+        type: String,
+        default: '',
+    },
+    cvLink: {
+        type: String,
+        default: '',
+    },
+    coverLetterLink: {
+        type: String,
+        default: '',
+    },
+    certificates: [{
+        name: String,
+        link: String
+    }]
+}, {
+    timestamps: true
 });
 
 const StudentProfile = mongoose.model('StudentProfile', StudentProfileSchema);
