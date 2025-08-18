@@ -5,7 +5,7 @@ const path = require('path');
 console.log('Building React app...');
 
 // Build the React app
-execSync('cd client && npm run build', { stdio: 'inherit' });
+execSync('npm run build', { stdio: 'inherit', cwd: 'client' });
 
 console.log('Copying built files to root...');
 
